@@ -15,7 +15,7 @@ def random_techs():
 # Define a default Elasticsearch client
 connections.create_connection(hosts=['localhost'])
 
-
+# Persistence
 class Member(DocType):
     name = String()
     age = Long()
