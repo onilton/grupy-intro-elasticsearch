@@ -1,15 +1,23 @@
 curl -XPUT localhost:9200/meetup/member/1 -d '{
-  "name": "Onilton Maciel", "age" : 27
+  "name": "Onilton Maciel", "age" : 27,  "techs" : "python scala shell"
 }'
 
 curl -XPUT localhost:9200/meetup/member/2 -d '{                                   
-"name": "Cristiane Maciel", "age" : 30
+"name": "Cristiane Maciel", "age" : 30, "techs" : "python react nodejs"
 }'
 
 curl -XPOST localhost:9200/meetup/member/ -d '{
-"name": "Cristiano Silva", "age" : 19
+"name": "Cristiano Silva", "age" : 19, "techs": "python rust"
 }'
 
 curl -XGET localhost:9200/meetup/user/_search -d '{ query : { 
 range : { age: { from: 19, to: 28 } } 
 } }'
+
+curl -XGET localhost:9200/meetup/member/_search?pretty=true -d '{
+  query : { query_string : { query : "maciel" } },
+  aggs: { age_count: {
+    terms : { field: "name" },
+    aggs: { avg_age: { avg : { field : "age"} } }
+  }}
+}'
