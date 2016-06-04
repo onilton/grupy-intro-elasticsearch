@@ -1,0 +1,15 @@
+curl -XPUT localhost:9200/meetup/member/1 -d '{
+  "name": "Onilton Maciel", "age" : 27
+}'
+
+curl -XPUT localhost:9200/meetup/member/2 -d '{                                   
+"name": "Cristiane Maciel", "age" : 30
+}'
+
+curl -XPOST localhost:9200/meetup/member/ -d '{
+"name": "Cristiano Silva", "age" : 19
+}'
+
+curl -XGET localhost:9200/meetup/user/_search -d '{ query : { 
+range : { age: { from: 19, to: 28 } } 
+} }'
